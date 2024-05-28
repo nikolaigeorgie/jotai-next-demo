@@ -5,6 +5,7 @@ const getData = async (num: any) => {
     await fetch(`https://jsonplaceholder.typicode.com/users/${num}`, {
       next: {
         revalidate: 0,
+        tags: [num],
       },
     })
   ).json();
@@ -16,6 +17,7 @@ const getData = async (num: any) => {
 };
 
 export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const nums = ["1", "2", "3"];
   return Promise.all(nums.map((num) => getData(num)));
@@ -31,6 +33,9 @@ const getThatData = async (id: any) => {
     },
     {
       id: "antonette",
+    },
+    {
+      id: "niko",
     },
   ];
   const found: any = hey.find((i) => i.id === id);
